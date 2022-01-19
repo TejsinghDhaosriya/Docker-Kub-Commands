@@ -49,3 +49,22 @@ Kill and Delete Containers and Images
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 docker rm -f $(docker ps -aq)        # Delete all Containers
 docker rmi -f $(docker images -q)    # Delete all Images
+
+
+
+Open a terminal in Postgresql of docker image
+#docker exec -it bb0f07a771bb psql -U user_name -W db_name
+Some explanation
+
+docker exec -it The command to run a command to a running container. The it flags open an interactive tty. Basically it will cause to attach to the terminal. If you wanted to open the bash terminal you can do this
+
+
+bb0f07a771bb  The container name (you could use the container id instead) 
+
+psql -U user_name -W db_name The command to execute to the running container
+
+U user
+
+W Tell psql that the user needs to be prompted for the password at connection time. This parameter is optional. Without this parameter, there is an extra connection attempt which will usually find out that a password is needed, see the PostgreSQL docs.
+
+db_name the database you want to connect to. There is no need for the -d parameter to mark it as the dbname when it is the first non-option argument, see the docs: -d "is equivalent to specifying dbname as the first non-option argument on the command line."
